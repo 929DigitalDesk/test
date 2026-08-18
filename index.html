@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>929 Digital Desk - Registration Form</title>
+    
+    <!-- Aggressively Catch all external sandbox/cross-origin errors silently -->
+    <script>
+        window.addEventListener('error', function(e) { e.preventDefault(); e.stopPropagation(); return true; }, true);
+        window.addEventListener('unhandledrejection', function(e) { e.preventDefault(); e.stopPropagation(); return true; }, true);
+        window.onerror = function() { return true; };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #D80032;
+            --primary-hover: #b00028;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff; 
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --vibrant-red: #EE4B2B; 
+            --car-green: #008f39; 
+            --car-green-hover: #00722d;
+            --whatsapp-green: #25D366;
+            --whatsapp-hover: #1da851;
+            --info-blue: #1e3a8a;
+            --brand-yellow: #FFC300;
+            --orange-theme: #f97316;
+            --orange-hover: #ea580c;
+            --chat-purple: #8b5cf6;
+            --chat-purple-hover: #7c3aed;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 12px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--card-bg);
+            padding: 20px 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px; 
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 24px;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .main-logo-img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px; 
+        }
+
+        .contact-badges-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-badge {
+            background-color: #0066cc;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 102, 204, 0.2);
+        }
+
+        .phone-badge {
+            background-color: #ffffff;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        .wa-icon-form {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            fill: #25D366;
+        }
+
+        .action-btns-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .help-trigger-btn, .plans-trigger-btn, .whatsapp-direct-btn, .chat-agent-btn {
+            border: none;
+            padding: 6px 14px; 
+            border-radius: 50px;
+            font-size: 11px; 
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s, opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            color: #ffffff !important;
+            width: auto;
+        }
+
+        .help-trigger-btn { background: #1e3a8a !important; }
+        .help-trigger-btn:hover { background: #172554 !important; }
+        .help-trigger-btn:active { transform: scale(0.98); }
+
+        .plans-trigger-btn { background: #f97316 !important; }
+        .plans-trigger-btn:hover { background: #ea580c !important; }
+        .plans-trigger-btn:active { transform: scale(0.98); }
+
+        .whatsapp-direct-btn { background: #25D366 !important; }
+        .whatsapp-direct-btn:hover { background: #1da851 !important; }
+        .whatsapp-direct-btn:active { transform: scale(0.98); }
+
+        .chat-agent-btn { background: var(--chat-purple) !important; }
+        .chat-agent-btn:hover { background: var(--chat-purple-hover) !important; }
+        .chat-agent-btn:active { transform: scale(0.98); }
+        .chat-agent-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 95%;
+            max-width: 550px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .modal-content.help-modal { border-top: 5px solid var(--orange-theme); }
+        .modal-content.help-modal h3 { color: var(--info-blue); border-bottom: 2px dashed var(--orange-theme); }
+
+        .modal-content.plans-modal { border-top: 5px solid var(--orange-theme); }
+        .modal-content.plans-modal h3 { color: var(--info-blue); border-bottom: 2px dashed var(--orange-theme); }
+
+        .modal-content h3 {
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 16px;
+            padding-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .modal-content ol {
+            padding-left: 20px;
+            line-height: 1.6;
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .close-modal-btn {
+            background: var(--info-blue);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        .close-modal-btn:hover { background: #172554; }
+
+        .plan-info-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .plan-info-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--info-blue);
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 8px;
+        }
+        .plan-info-box h4 .price { color: var(--orange-theme); }
+        .plan-info-box p { font-size: 13px; margin: 8px 0 4px 0; color: #1e293b;}
+        .plan-info-box ul, .plan-info-box ol { font-size: 12.5px; color: #475569; margin: 4px 0 12px 0; padding-left: 20px; line-height: 1.5; }
+        .plan-info-box .cons-title { color: #D80032; font-weight: 700; }
+        .plan-info-box .cons-list { color: #D80032; }
+
+        .grid-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 500px) {
+            .grid-form { grid-template-columns: 1fr 1fr; }
+            .form-box.full-width, .warning-box, #premium-section { grid-column: span 2; }
+        }
+
+        .form-box { display: flex; flex-direction: column; gap: 6px; }
+        .form-box label { font-weight: 600; color: var(--text-main); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-box input, .form-box select, .form-box textarea {
+            width: 100%; padding: 10px 12px; border: 1.5px solid #60a5fa; border-radius: 8px;
+            font-size: 13.5px; font-family: inherit; color: #ffffff; background: #1e3a8a; 
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-box input::placeholder, .form-box textarea::placeholder { color: #93c5fd; opacity: 1; }
+        .form-box input:focus, .form-box select:focus, .form-box textarea:focus {
+            outline: none; border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25); background: #172554; 
+        }
+        .form-box input[type="file"] { padding: 8px; background: #1e3a8a; color: #ffffff; cursor: pointer; border: 1.5px dashed #60a5fa; }
+        .form-box small { font-size: 10px; color: var(--text-muted); }
+
+        input[readonly] { background-color: #1e40af !important; color: #bfdbfe !important; cursor: not-allowed; border-color: #3b82f6 !important; }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        @media (min-width: 500px) { .plan-grid { grid-template-columns: 1fr 1fr; } }
+        .plan-radio-label { cursor: pointer; display: block; }
+        .plan-radio-label input[type="radio"] { display: none; }
+        .plan-card-inner {
+            background: #1e3a8a; border: 2px solid #60a5fa; border-radius: 8px; padding: 16px 12px;
+            text-align: center; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); height: 100%;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .plan-radio-label:hover .plan-card-inner { background: #172554; }
+        .plan-radio-label input[type="radio"]:checked + .plan-card-inner {
+            background: var(--primary); border-color: var(--primary);
+            box-shadow: 0 6px 16px rgba(216, 0, 50, 0.35); transform: translateY(-3px);
+        }
+        .plan-title { font-weight: 800; color: #ffffff; font-size: 14px; margin-bottom: 4px; display: block; text-transform: uppercase; }
+        .plan-desc { font-size: 10.5px; color: #93c5fd; display: block; margin-bottom: 8px; line-height: 1.4; }
+        .plan-price { font-weight: 900; color: #FFC300; font-size: 15px; display: inline-block; background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 50px; }
+
+        #premium-section { display: none; background: #f0fdf4; border: 2px solid var(--car-green); border-radius: 8px; padding: 16px; text-align: center; margin-top: 12px; }
+        #premium-section h3 { color: #065f46; margin: 0 0 8px 0; font-size: 16px; }
+        #premium-section p { font-size: 12px; color: #047857; margin: 0 0 12px 0; }
+        #qrcode-container { display: inline-block; padding: 10px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 12px; }
+        
+        .upi-btn {
+            display: block; width: 100%; background: var(--car-green); color: #ffffff; padding: 14px; text-align: center;
+            font-size: 15px; font-weight: 800; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 143, 57, 0.3);
+            border: 2px solid #006629; transition: background 0.2s, transform 0.1s;
+        }
+        .upi-btn:hover { background: var(--car-green-hover); }
+
+        .warning-box {
+            grid-column: 1 / -1; background: #fef2f2; border: 1px solid #f87171; padding: 16px; border-radius: 8px;
+            margin-top: 12px; font-size: 12.5px; color: #991b1b; line-height: 1.5;
+        }
+        .warning-box strong { color: #b91c1c; display: block; margin-bottom: 8px; font-size: 14px; text-transform: uppercase; }
+        .consent-check { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px dashed #fca5a5; }
+        .consent-check input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
+        .consent-check label { font-weight: 700; color: #7f1d1d; cursor: pointer; font-size: 13px; }
+
+        .submit-btn {
+            background: var(--primary); color: #ffffff; border: none; padding: 16px; font-size: 14px; font-weight: 700;
+            border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(216, 0, 50, 0.25); margin-top: 12px;
+        }
+        .submit-btn:hover { background: var(--primary-hover); }
+        .support-note { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 16px; }
+
+        /* =========================================
+           NEW SUCCESS POPUP MODAL STYLES (BLUE/YELLOW)
+           ========================================= */
+        .success-modal-card {
+            background: linear-gradient(to bottom, #ffffff, #f8fafc);
+            width: 90%;
+            max-width: 440px;
+            padding: 40px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.3);
+            border-top: 8px solid var(--brand-yellow);
+            border-bottom: 8px solid var(--info-blue);
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-icon-wrap {
+            width: 80px;
+            height: 80px;
+            background: var(--info-blue);
+            border: 4px solid var(--brand-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            color: var(--brand-yellow);
+            font-size: 40px;
+            font-weight: 900;
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+        }
+        .success-modal-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--info-blue);
+            margin: 0 0 12px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .success-modal-desc {
+            font-size: 15px;
+            color: #334155;
+            line-height: 1.6;
+            margin: 0 0 28px 0;
+            font-weight: 600;
+            padding: 0 10px;
+        }
+        .success-modal-desc span.highlight-id {
+            color: var(--info-blue);
+            font-weight: 900;
+            background: #fffbeb;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 2px solid var(--brand-yellow);
+            display: inline-block;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .success-close-btn {
+            background: var(--brand-yellow);
+            color: var(--info-blue);
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(255, 195, 0, 0.35);
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+        .success-close-btn:hover { 
+            background: #e6b000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 195, 0, 0.45);
+        }
+        
+        .custom-message-box { 
+            display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+            background: var(--info-blue); color: #ffffff; padding: 12px 24px; border-radius: 8px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 9999; font-weight: 800; font-size: 14px; 
+            text-align: center; border: 2px solid #3b82f6; min-width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div id="customMessage" class="custom-message-box">
+        Message goes here
+    </div>
+
+    <!-- How to Use Helpline Service Modal -->
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal-content help-modal">
+            <h3>How to use Helpline Service</h3>
+            <ol>
+                <li><strong>Step 1:</strong> Get Registered by filling out the form below.</li>
+                <li><strong>Step 2:</strong> Send details & payment proof (if paid) to <strong style="white-space: nowrap;">WhatsApp: +1 (555) 9565-917</strong>.</li>
+                <li><strong>Step 3:</strong> You will be notified of the appointment time for your Helpline service.</li>
+                <li><strong>Step 4:</strong> Our subject expert will ask your details and then solve your issues online.</li>
+            </ol>
+            <button type="button" class="close-modal-btn" onclick="toggleModal('helpModal', false)">Got it, Return to Form</button>
+        </div>
+    </div>
+
+    <!-- Detailed Plans Information Modal -->
+    <div class="modal-overlay" id="plansModal">
+        <div class="modal-content plans-modal">
+            <h3>Helpline Service Plans</h3>
+            
+            <div class="plan-info-box">
+                <h4>FREE PLAN <span class="price">₹0</span></h4>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>You can ask any 1 question on 1 particular topic from 1 chapter of 1 subject. Whether it is a doubt or you want the entire concept explained, it will be fully explained.</li>
+                </ul>
+                <p><strong>Eligibility:</strong></p>
+                <ul>
+                    <li>Need to Register on our website</li>
+                    <li>Required to submit College ID and Adhaar Number for Verification</li>
+                    <li>Applicant is required to send the online Generated ID card to our WhatsApp Number +1 (555) 9565-917 and wait for our message</li>
+                </ul>
+                <p class="cons-title">CONS:</p>
+                <ul class="cons-list">
+                    <li>Available only once for one particular applicant.</li>
+                    <li>Free session includes one particular subject’s one particular chapter’s one particular topic only</li>
+                </ul>
+            </div>
+
+            <div class="plan-info-box">
+                <h4>PRIME PLAN <span class="price">₹5000</span></h4>
+                <p><strong>Features:</strong></p>
+                <ol>
+                    <li>It's like a Regular weekly basis classes.</li>
+                    <li>Regular weekly 1 topic will be taken in the online session. Students can attend and clear their doubts if they have in that particular Topic / Question.</li>
+                    <li>The Entire syllabus will be Divided to different session which will cover the entire syllabus.</li>
+                    <li>You are in Regular touch of the subject and subject Expert for your entire academic year.</li>
+                </ol>
+                <p><strong>Validity:</strong> From Registration date to next forthcoming year's 10th day of February in case of 12 Class and 31st March in case of Class 11.</p>
+                <p class="cons-title">CONS:</p>
+                <ul class="cons-list">
+                    <li>If you missed any session then you can not reclaim the session and can not say to re-explain or re-discuss the missed topic or the topic that got completed in the earlier session.</li>
+                </ul>
+            </div>
+
+            <div class="plan-info-box">
+                <h4>PRO PLAN <span class="price">₹300</span></h4>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Guaranteed session (1 Question of 1 Topic of 1 Chapter)</li>
+                    <li>Duration ranging 25 to 30 minutes</li>
+                </ul>
+                <p><strong>Validity:</strong> From Registration date to next forthcoming year's 10th day of February in case of 12 Class and 31st March in case of Class 11.</p>
+            </div>
+
+            <div class="plan-info-box">
+                <h4>PREMIUM PLAN <span class="price">₹6000</span></h4>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Guaranteed weekly 1 session for your preferred 1 Question of 1 Topic of 1 Chapter of 1 Subject</li>
+                    <li>Learn understand clear doubts get guidance for the same</li>
+                </ul>
+                <p><strong>Validity:</strong> From Registration date to next forthcoming year's 10th day of February in case of 12 Class and 31st March in case of Class 11.</p>
+            </div>
+
+            <div class="plan-info-box">
+                <h4>GENX PLAN <span class="price">₹1000</span></h4>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Includes 5 PRO sessions and Features of PRO PLAN</li>
+                </ul>
+                <p><strong>Validity:</strong> From Registration date to next forthcoming year's 10th day of February in case of 12 Class and 31st March in case of Class 11.</p>
+                <p class="cons-title">CONS:</p>
+                <ul class="cons-list">
+                    <li>Can not be clubbed with any other plan</li>
+                    <li>Can not be transferable to another plan or can be shared with other person for utilizing</li>
+                </ul>
+            </div>
+
+            <div class="plan-info-box">
+                <h4>GENX PRO <span class="price">₹3000</span></h4>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Includes 15 PRO Sessions and Features of PRO PLAN</li>
+                </ul>
+                <p><strong>Validity:</strong> From Registration date to next forthcoming year's 10th day of February in case of 12 Class and 31st March in case of Class 11.</p>
+                <p class="cons-title">CONS:</p>
+                <ul class="cons-list">
+                    <li>Can not be clubbed with any other plan</li>
+                    <li>Can not be transferable to other plan or can be shared with other person for utilizing</li>
+                </ul>
+            </div>
+
+            <div class="plan-info-box" style="border: 1px solid #f59e0b; background: #fffbeb;">
+                <h4 style="color: #d97706; margin-bottom: 8px;">RULES | PROCESS & CONDITIONS</h4>
+                <ol style="margin-top: 0; padding-left: 16px; font-size: 12px; color: #78350f; margin-bottom: 0;">
+                    <li style="margin-bottom: 4px;">In every plan Prior submission of Topic Request is Required.</li>
+                    <li style="margin-bottom: 4px;">Your requested Topic will be Scheduled and the same will be conveyed to you on your whatsapp number or Registered Mail.</li>
+                    <li style="margin-bottom: 4px;">Fees once paid is not Refundable or Transferable in any manner.</li>
+                    <li style="margin-bottom: 4px;">The Purchased Plans are Non Transferable and should be strictly used by the person in whos' Name its been Registered.</li>
+                    <li style="margin-bottom: 4px;">Submission of College ID and Adhaar Number is Required for verification process to Schedule the services.</li>
+                    <li style="margin-bottom: 4px;">The Plan services will be provided purely online.</li>
+                    <li style="margin-bottom: 4px;">The Session can be Rescheduled due to Technical / Physical or Health or any other issue that makes the Admin or Subject Expert Faculties unable to host the session but the same will be rescheduled / compensated on another day.</li>
+                    <li style="margin-bottom: 4px;">Once the Schedule is fixed student has to be available on the prescribed time with the essential things to make the session feasible. If due to network issue or any other issue that takes place at students end then the student can not claim to reschedule the session again for him/ her due to student's personal issues.</li>
+                    <li style="margin-bottom: 4px;">Student should maintain discipline during the Online session else they will be barred or blocked and No refund of Plan Fees / Money will be given back to the student.</li>
+                    <li>Student should follow the Rules related to the session of asking their questions limited to 1 particular question of 1 particular topic of one chapter & subject only.</li>
+                </ol>
+            </div>
+
+            <button type="button" class="close-modal-btn" onclick="toggleModal('plansModal', false)">Close Plans</button>
+        </div>
+    </div>
+
+    <!-- BEAUTIFUL BLUE & YELLOW SUCCESS POPUP MODAL -->
+    <div class="modal-overlay" id="successModal" style="display: none;">
+        <div class="success-modal-card">
+            
+            <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                <img src="logo_6.png" alt="929 Digital Desk Logo" style="max-width: 200px; height: auto;">
+            </div>
+            
+            <div class="success-icon-wrap">✓</div>
+            <h2 class="success-modal-title">THANK YOU</h2>
+            
+            <p class="success-modal-desc">
+                Registration form submitted successfully.<br><br>
+                Verification in process - If approved you will receive your<br>
+                <span class="highlight-id">IDENTITY CARD</span>
+            </p>
+            
+            <button type="button" class="success-close-btn" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        
+        <div class="form-header">
+            <div class="logo-wrapper">
+                <img src="logo_6.png" alt="929 Digital Desk Logo" class="main-logo-img">
+            </div>
+            
+            <div class="contact-badges-wrapper">
+                <div class="contact-badge email-badge">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    929.DigitalDesk@gmail.com
+                </div>
+                <div class="contact-badge phone-badge">
+                    <svg class="wa-icon-form" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.396.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    </svg>
+                    Helpline: +1 (555) 9565-917
+                </div>
+            </div>
+        </div>
+
+        <div class="action-btns-container">
+            <button type="button" class="help-trigger-btn" onclick="toggleModal('helpModal', true)">
+                📖 How to use
+            </button>
+            <button type="button" class="plans-trigger-btn" onclick="toggleModal('plansModal', true)">
+                📋 PLANS & RULES
+            </button>
+            
+            <a href="https://wa.me/15559565917" target="_blank" rel="noopener noreferrer" class="whatsapp-direct-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M12 3a8.5 8.5 0 0 0-8.5 8.5c0 1.835.58 3.532 1.568 4.92.227.319.283.69.304.926.023.27.012.562-.014.844A15.032 15.032 0 0 1 5.055 20L5 20.24l.312-.127a17.83 17.83 0 0 1 1.785-.623 5.67 5.67 0 0 1 .83-.173c.228-.027.595-.05.942.088A8.475 8.475 0 0 0 12 20a8.5 8.5 0 0 0 0-17ZM2.543 21.709l.003-.01.01-.033a22.762 22.762 0 0 0 .173-.606c.11-.4.25-.936.373-1.492.124-.562.225-1.116.264-1.557a2.994 2.994 0 0 0 .01-.52A10.456 10.456 0 0 1 1.5 11.5C1.5 5.701 6.201 1 12 1s10.5 4.701 10.5 10.5S17.799 22 12 22a10.47 10.47 0 0 1-3.782-.702c-.015 0-.035.003-.059.005-.123.015-.3.051-.53.115a15.92 15.92 0 0 0-1.574.552 37.308 37.308 0 0 0-1.95.85l-.129.06-.033.016-.01.005a1 1 0 0 1-1.39-1.192Zm5.715-.412h-.002.002Z" clip-rule="evenodd"></path>
+                    <path d="M16.885 13.823c-.042-.02-1.616-.795-1.895-.896a1.089 1.089 0 0 0-.367-.081c-.212 0-.391.106-.53.314-.157.233-.633.79-.78.956-.02.022-.046.048-.062.048-.014 0-.257-.1-.33-.132-1.69-.733-2.971-2.497-3.147-2.795-.025-.042-.026-.062-.026-.062a.492.492 0 0 1 .092-.109c.086-.085.179-.196.269-.305.042-.05.085-.102.127-.15.13-.152.188-.27.255-.406l.036-.071a.732.732 0 0 0-.022-.691c-.037-.075-.702-1.679-.772-1.847C9.563 7.189 9.338 7 9.026 7c-.029 0 0 0-.121.005-.148.006-.953.112-1.309.337-.377.238-1.016.996-1.016 2.33 0 1.201.762 2.335 1.09 2.766l.044.065c1.253 1.83 2.814 3.185 4.398 3.818 1.524.609 2.246.679 2.656.679.173 0 .31-.014.432-.026l.078-.007c.526-.047 1.684-.646 1.947-1.378.207-.576.262-1.205.124-1.434-.095-.155-.258-.233-.464-.332Z"></path>
+                </svg>
+                WhatsApp
+            </a>
+            
+            <a href="https://agent.jotform.com/019699601c1575a9b097fc67705cb07a09b3" target="_blank" rel="noopener noreferrer" class="chat-agent-btn">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                CUSTOMER SUPPORT
+            </a>
+        </div>
+
+        <form id="registrationForm">
+            <div class="grid-form">
+                
+                <div class="form-box">
+                    <label>Registration Date</label>
+                    <input type="date" id="regDate" required readonly>
+                </div>
+
+                <div class="form-box">
+                    <label>Full Name *</label>
+                    <input type="text" id="studentName" required placeholder="Student Name">
+                </div>
+                
+                <div class="form-box">
+                    <label>Email Address *</label>
+                    <input type="email" id="studentEmail" required placeholder="student@email.com">
+                </div>
+
+                <div class="form-box">
+                    <label>WhatsApp Number *</label>
+                    <input type="tel" id="whatsappNumber" required placeholder="+1 234 567 8900">
+                </div>
+                
+                <div class="form-box">
+                    <label>Student Photo (For ID) *</label>
+                    <input type="file" id="studentPhoto" accept="image/*" required>
+                </div>
+
+                <div class="form-box full-width">
+                    <label>Residential Address *</label>
+                    <textarea id="address" rows="2" required placeholder="Full Address"></textarea>
+                </div>
+
+                <div class="form-box full-width">
+                    <label>College/University Name *</label>
+                    <input type="text" id="collegeName" required placeholder="Current Institution">
+                </div>
+
+                <div class="form-box">
+                    <label>Class / Course *</label>
+                    <select id="course" required onchange="checkCourseOther()">
+                        <option value="" disabled selected>Select Class / Course</option>
+                        <option value="XI Commerce">XI Commerce</option>
+                        <option value="XII Commerce">XII Commerce</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-box" id="otherCourseBox" style="display: none;">
+                    <label>Specify Class / Course *</label>
+                    <input type="text" id="otherCourseInput" placeholder="Enter your course name">
+                </div>
+
+                <div class="form-box">
+                    <label>Division *</label>
+                    <input type="text" id="studentDivision" required placeholder="e.g., A, B, Sec 1">
+                </div>
+
+                <div class="form-box">
+                    <label>Roll Number *</label>
+                    <input type="text" id="studentRoll" required placeholder="e.g., 42">
+                </div>
+
+                <div class="form-box">
+                    <label>Subject *</label>
+                    <select id="subject" required>
+                        <option value="" disabled selected>Select Subject</option>
+                        <option value="ENGLISH">ENGLISH</option>
+                        <option value="HINDI">HINDI</option>
+                        <option value="MARATHI">MARATHI</option>
+                        <option value="B.K">B.K</option>
+                        <option value="O.C.M">O.C.M</option>
+                        <option value="S.P.">S.P.</option>
+                        <option value="ECONOMICS">ECONOMICS</option>
+                    </select>
+                </div>
+
+                <div class="form-box full-width">
+                    <label>Exact Chapter Name *</label>
+                    <input type="text" id="chapterName" required placeholder="Chapter you need help with">
+                </div>
+
+                <div class="form-box full-width">
+                    <label>Describe the Issue/Requirement *</label>
+                    <textarea id="requirement" rows="3" required placeholder="Be specific about what you need..."></textarea>
+                </div>
+                
+                <div class="form-box full-width">
+                    <label>Referral Source *</label>
+                    <select id="referral" required>
+                        <option value="" disabled selected>How did you hear about us?</option>
+                        <option value="Friend">Friend / Peer</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Teacher">Teacher / College</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-box full-width">
+                    <label>Plan Selection * (Validity counts strictly from registration date)</label>
+                    <div class="plan-grid">
+                        <label class="plan-radio-label">
+                            <input type="radio" name="planSelection" value="Free" data-amount="0" onchange="checkPlan()" required>
+                            <div class="plan-card-inner">
+                                <span class="plan-title">Free Plan</span>
+                                <span class="plan-desc">Valid from Reg. Date<br>1 Topic / 1 Question</span>
+                                <span class="plan-price">₹0</span>
+                            </div>
+                        </label>
+                        
+                        <label class="plan-radio-label">
+                            <input type="radio" name="planSelection" value="Prime" data-amount="5000" onchange="checkPlan()">
+                            <div class="plan-card-inner">
+                                <span class="plan-title">Prime Plan</span>
+                                <span class="plan-desc">Valid from Reg. Date<br>Weekly 1 Session</span>
+                                <span class="plan-price">₹5000</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-radio-label">
+                            <input type="radio" name="planSelection" value="Pro" data-amount="300" onchange="checkPlan()">
+                            <div class="plan-card-inner">
+                                <span class="plan-title">Pro Plan</span>
+                                <span class="plan-desc">Valid from Reg. Date<br>1 Session (25-30m)</span>
+                                <span class="plan-price">₹300</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-radio-label">
+                            <input type="radio" name="planSelection" value="Premium" data-amount="6000" onchange="checkPlan()">
+                            <div class="plan-card-inner">
+                                <span class="plan-title">Premium Plan</span>
+                                <span class="plan-desc">Weekly 1 Session<br>Preferred Topic</span>
+                                <span class="plan-price">₹6000</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-radio-label">
+                            <input type="radio" name="planSelection" value="GenX" data-amount="1000" onchange="checkPlan()">
+                            <div class="plan-card-inner">
+                                <span class="plan-title">GenX Plan</span>
+                                <span class="plan-desc">Includes 5 PRO Sessions<br>Subject to Academic Year</span>
+                                <span class="plan-price">₹1000</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-radio-label">
+                            <input type="radio" name="planSelection" value="GenXPro" data-amount="3000" onchange="checkPlan()">
+                            <div class="plan-card-inner">
+                                <span class="plan-title">GenX Pro</span>
+                                <span class="plan-desc">Includes 15 PRO Sessions<br>Subject to Academic Year</span>
+                                <span class="plan-price">₹3000</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-radio-label" style="grid-column: 1 / -1;">
+                            <input type="radio" name="planSelection" value="Existing" data-amount="0" onchange="checkPlan()">
+                            <div class="plan-card-inner" style="padding: 14px;">
+                                <span class="plan-title" style="margin: 0; font-size: 15px;">Existing Member Claim</span>
+                                <span class="plan-desc" style="margin-top: 4px; margin-bottom: 0;">Already have an ID? Claim a session here.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-box full-width" id="userIdBox" style="display: none; background: #fffbeb; padding: 12px; border-radius: 8px; border: 1px solid #fcd34d;">
+                    <label style="color: #b45309;">Enter your User ID</label>
+                    <input type="text" id="userId" placeholder="e.g., PRO-1234" style="border-color: #fcd34d;">
+                </div>
+
+                <div id="premium-section" class="form-box full-width">
+                    <h3>Secure Payment Gateway</h3>
+                    <p>Complete your UPI payment to finalize premium registration.</p>
+                    <div id="qrcode-container">
+                        <img id="qrCodeImage" crossorigin="anonymous" src="" alt="Payment QR Code" style="display: none; width: 150px; height: 150px;">
+                    </div>
+                    <a href="#" id="upiPaymentBtn" class="upi-btn">Pay via Mobile UPI App</a>
+                    <div class="form-box" style="margin-top: 15px; text-align: left;">
+                        <label style="color: #065f46;">Upload Payment Screenshot *</label>
+                        <input type="file" id="paymentScreenshot" accept="image/*" style="background: #ffffff; color: #064e3b; border-color: #008f39;">
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Declaration & Warning</strong>
+                    By submitting this registration form, I declare that all information provided above is completely genuine and true. I understand that the validity of all plans is counted strictly starting from the registration date, and providing fake, misleading, or incorrect information may lead to strict disciplinary action and immediate cancellation of my registration without refund.
+                    
+                    <div class="consent-check">
+                        <input type="checkbox" id="consentCheck" required>
+                        <label for="consentCheck">I agree that the information provided is true and I abide by the rules of 929 Digital Desk.</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Registration Form</button>
+        </form>
+        
+        <div class="support-note">
+            Need help? Contact HelpDesk Support: 929.DigitalDesk@gmail.com
+        </div>
+    </div>
+
+    <script>
+        function showNotification(message) {
+            try {
+                const msgBox = document.getElementById("customMessage");
+                msgBox.innerText = message;
+                msgBox.style.display = "block";
+                setTimeout(() => { msgBox.style.display = "none"; }, 4000);
+            } catch(e) {}
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                document.getElementById('regDate').value = `${yyyy}-${mm}-${dd}`;
+            } catch(e) {}
+        });
+
+        function toggleModal(modalId, show) {
+            try {
+                if(event) event.preventDefault();
+                document.getElementById(modalId).style.display = show ? 'flex' : 'none';
+            } catch(e) {}
+        }
+
+        function checkCourseOther() {
+            try {
+                const courseSelect = document.getElementById("course");
+                const otherBox = document.getElementById("otherCourseBox");
+                const otherInput = document.getElementById("otherCourseInput");
+                if (courseSelect && courseSelect.value === "Other") {
+                    otherBox.style.display = "flex";
+                    otherInput.required = true;
+                } else if(otherBox) {
+                    otherBox.style.display = "none";
+                    otherInput.required = false;
+                }
+            } catch(e) {}
+        }
+
+        function checkPlan() {
+            try {
+                const premiumSection = document.getElementById("premium-section");
+                const fileInput = document.getElementById("paymentScreenshot");
+                const upiBtn = document.getElementById("upiPaymentBtn");
+                const userIdBox = document.getElementById("userIdBox");
+                const userIdInput = document.getElementById("userId");
+                const qrImage = document.getElementById("qrCodeImage");
+                
+                const selectedPlan = document.querySelector('input[name="planSelection"]:checked');
+                if (!selectedPlan) return;
+                
+                const amount = selectedPlan.getAttribute("data-amount");
+                const planValue = selectedPlan.value;
+                
+                if (planValue === "Existing") {
+                    premiumSection.style.display = "none";
+                    fileInput.required = false;
+                    userIdBox.style.display = "block";
+                    userIdInput.required = true;
+                } else if (parseInt(amount) > 0) {
+                    premiumSection.style.display = "block";
+                    fileInput.required = true;
+                    userIdBox.style.display = "none";
+                    userIdInput.required = false;
+                    
+                    const formattedAmount = parseFloat(amount).toFixed(2);
+                    const trRef = "929DD" + Math.floor(Math.random() * 1000000);
+                    const upiString = `upi://pay?pa=verizon@upi&pn=929%20Digital%20Desk&tr=${trRef}&tn=929%20Desk%20Registration&am=${formattedAmount}&cu=INR`;
+                    
+                    upiBtn.href = upiString;
+                    upiBtn.innerHTML = `📲 Pay ₹${amount} via Mobile UPI App`;
+                    
+                    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiString)}`;
+                    qrImage.style.display = "block";
+                } else {
+                    premiumSection.style.display = "none";
+                    fileInput.required = false; 
+                    userIdBox.style.display = "none";
+                    userIdInput.required = false;
+                }
+            } catch(e) {}
+        }
+
+        try {
+            document.getElementById("registrationForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                try {
+                    const name = document.getElementById("studentName").value || "Student";
+                    const email = document.getElementById("studentEmail").value || "";
+                    const whatsapp = document.getElementById("whatsappNumber").value || "";
+                    const college = document.getElementById("collegeName").value || "N/A";
+                    
+                    let courseVal = document.getElementById("course").value || "";
+                    if (courseVal === "Other") {
+                        courseVal = document.getElementById("otherCourseInput").value || "Other";
+                    }
+
+                    const division = document.getElementById("studentDivision").value || "-";
+                    const roll = document.getElementById("studentRoll").value || "-";
+                    const subject = document.getElementById("subject").value || "-";
+                    const chapter = document.getElementById("chapterName").value || "-";
+                    const requirement = document.getElementById("requirement").value || "-";
+                    
+                    const selectedPlanInput = document.querySelector('input[name="planSelection"]:checked');
+                    const planValue = selectedPlanInput ? selectedPlanInput.value : "Free";
+                    const regDate = document.getElementById("regDate").value || new Date().toISOString().split('T')[0];
+
+                    // Trigger the Success Popup immediately
+                    document.getElementById("successModal").style.display = "flex";
+
+                    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFOl3rV-TRmEGKJJtvrSfL_x6LC85reYx9uiBgXpOxAO9JRt4SsXFRzTnfZrleRckozQ/exec"; 
+                    if (SCRIPT_URL && SCRIPT_URL.includes("script.google.com")) {
+                        // Using catch heavily on the fetch to prevent Unhandled Promise Rejections in sandbox
+                        fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                            body: JSON.stringify({ name, email, whatsapp, college, course: courseVal, division, roll, subject, chapter, requirement, plan: planValue, date: regDate })
+                        }).catch(err => { /* Swallow exception */ });
+                    }
+                } catch(e) {
+                    showNotification("An error occurred during submission. Try again.");
+                }
+            });
+        } catch(e) {}
+
+        function closeSuccessModal() {
+            try {
+                document.getElementById("successModal").style.display = "none";
+                document.getElementById("registrationForm").reset();
+                checkPlan(); 
+                checkCourseOther();
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
